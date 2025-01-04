@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="../Imagenes/Logo.ico" type="image/x-icon">
+    <title>Gestión de elementos con JavaScript</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            text-align: center;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #333;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .inicio {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #f5f5f5;
+            text-decoration: none;
+            transition: color 0.6s;
+            transition: transform 0.6s ease, filter 0.6s ease;
+        }
+
+        .navbar .inicio:hover {
+            color: #e74c3c;
+            transform: scale(1.05);
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            flex-grow: 1;
+            justify-content: center;
+        }
+
+        .navbar ul li {
+            margin: 0 15px;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: #f5f5f5;
+            font-weight: 400;
+            transition: color 0.3s ease-in-out;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar ul li a:hover {
+            color: #3498db;
+        }
+
+        .navbar-logo {
+            width: 40px;
+            height: auto;
+            margin-left: 20px;
+            order: 2;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .navbar-logo:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+
+        h1 {
+            font-size: 38px;
+            color: #2c3e50;
+            margin-top: 30px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+            letter-spacing: 1px;
+        }
+
+        h3 {
+            font-size: 26px;
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+
+        /* Estilos del formulario */
+        .formulario {
+            background-color: #ecf0f1;
+            padding: 25px;
+            margin: 30px auto;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .formulario:hover {
+            transform: translateY(-5px);
+        }
+
+        .formulario input[type="color"] {
+            width: 60px;
+            height: 35px;
+            border: none;
+            margin-right: 15px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .formulario input[type="color"]:hover {
+            transform: scale(1.1);
+        }
+
+        .formulario button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            margin-top: 15px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .formulario button:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
+        #contenedor {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            padding: 30px;
+        }
+
+        .elemento {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 220px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 0.6s forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .elemento:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .elemento img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .elemento img:hover {
+            transform: scale(1.1);
+        }
+
+        .botones {
+            margin-top: 12px;
+        }
+
+        .botones button {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 5px;
+            font-size: 15px;
+            margin: 7px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .botones button:hover {
+            background-color: #c0392b;
+            transform: scale(1.1);
+        }
+
+        footer {
+            background-color: #333;
+            color: #f5f5f5;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+            font-size: 14px;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="inicio">Inicio</a>
+        <ul>
+            <li><a href="#">Gestión JS</a></li>
+            <li><a href="gestionJQuery.html">Gestión JQuery</a></li>
+            <li><a href="../humanBenchMark/JScript/index.html">Benchmark JS</a></li>
+            <li><a href="../humanBenchMark/JQuery/index.html">Benchmark JQuery</a></li>
+        </ul>
+        <img src="../Imagenes/Logo.png" alt="Logo" class="navbar-logo">
+    </nav>
+    <h1>Gestión de elementos con JavaScript</h1>
+
+    <div class="formulario">
+        <h3>Cambiador de elementos en JS</h3>
+        <label for="color">Selecciona un color:</label>
+        <input type="color" id="color" value="#ffffff">
+        <br />
+        <button id="cambiarFondo">Cambiar color de fondo</button>
+        <br />
+        <button id="añadirElemento">Añadir más elementos</button>
+        <br />
+        <button id="resetearTodo">Resetear todo</button>
+    </div>
+
+    <h3>Elemento imagen</h3>
+    <div id="contenedor">
+        <div class="elemento">
+            <img src="../Imagenes/OZ/llanta-para-coche-oz-racing-leggenda-blanco-carrera.jpg" alt="Llantas">
+            <div class="botones">
+                <button class="cambiar">Cambiar</button>
+                <button class="borrar">Borrar</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Práctica 8 - Ivan Castillejo Rueda | <a href="#">Aviso Legal</a></p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const contenedor = document.getElementById("contenedor");
+
+            // Fondo
+            document.getElementById("cambiarFondo").addEventListener("click", () => {
+                const colorSeleccionado = document.getElementById("color").value;
+                document.body.style.backgroundColor = colorSeleccionado;
+            });
+
+            // Añadir elemento
+            document.getElementById("añadirElemento").addEventListener("click", () => {
+                const nuevoElemento = document.createElement("div");
+                nuevoElemento.classList.add("elemento");
+                nuevoElemento.innerHTML = `
+                    <img src="../Imagenes/OZ/llanta-para-coche-oz-racing-formula-hlt.jpg" alt="Llantas">
+                    <div class="botones">
+                        <button class="cambiar">Cambiar</button>
+                        <button class="borrar">Borrar</button>
+                    </div>
+                `;
+                contenedor.appendChild(nuevoElemento);
+            });
+
+            contenedor.addEventListener("click", (e) => {
+                const elemento = e.target;
+
+                // Eliminar el elemento
+                if (elemento.classList.contains("borrar")) {
+                    elemento.closest(".elemento").remove();
+                }
+
+                // Cambiar imagen
+                if (elemento.classList.contains("cambiar")) {
+                    const img = elemento.closest(".elemento").querySelector("img");
+                    const srcActual = img.getAttribute("src");
+                    const imagenOriginal = "../Imagenes/OZ/llanta-para-coche-oz-racing-leggenda-blanco-carrera.jpg";
+                    const imagenNueva = "../Imagenes/OZ/llanta-para-coche-oz-racing-formula-hlt.jpg";
+                    
+                    if (srcActual.includes("../Imagenes/OZ/llanta-para-coche-oz-racing-formula-hlt.jpg")) {
+                        img.setAttribute("src", imagenOriginal);
+                    } else {
+                        img.setAttribute("src", `${imagenNueva}?${new Date().getTime()}`);
+                    }
+                }
+            });
+
+            // Reset
+            document.getElementById("resetearTodo").addEventListener("click", () => {
+                document.body.style.backgroundColor = "#f4f4f4";
+                document.getElementById("color").value = "#ffffff";
+                contenedor.innerHTML = `
+                    <div class="elemento">
+                        <img src="../Imagenes/OZ/llanta-para-coche-oz-racing-leggenda-blanco-carrera.jpg" alt="Llantas">
+                        <div class="botones">
+                            <button class="cambiar">Cambiar</button>
+                            <button class="borrar">Borrar</button>
+                        </div>
+                    </div>
+                `;
+            });
+        });
+    </script>
+</body>
+
+</html>
