@@ -97,7 +97,7 @@
         }
 
         .formulario {
-            background-color: #ecf0f1;
+            background-color: #ffffff;
             padding: 25px;
             margin: 30px auto;
             width: 80%;
@@ -141,7 +141,6 @@
             transform: scale(1.05);
         }
 
-        /* Estilos de los elementos */
         #contenedor {
             display: flex;
             justify-content: center;
@@ -151,7 +150,7 @@
         }
 
         .elemento {
-            background-color: #fff;
+            background-color: #ffffff;
             border-radius: 10px;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
             padding: 20px;
@@ -280,7 +279,7 @@
             // Fondo
             $('#cambiarFondo').click(function () {
                 let colorSeleccionado = $('#color').val();
-                $('body').css('background-color', colorSeleccionado);
+                $('.formulario').css('background-color', colorSeleccionado);
             });
 
             // Añadir elemento
@@ -312,12 +311,12 @@
                 if (srcActual.includes('llanta-para-coche-platin-p116-negro-bronce.jpg')) {
                     $img.attr('src', imagenOriginal);
                 } else {
-                    $img.attr('src', imagenNueva + '?' + new Date().getTime()); // Añadir timestamp para evitar caché
+                    $img.attr('src', imagenNueva + '?' + new Date().getTime());
                 }
             });
             // Reset
             $('#resetearTodo').click(function () {
-                $('body').css('background-color', '#f4f4f4');
+                $('.formulario').css('background-color', '#ffffff');
                 $('#color').val('#ffffff');
                 $('#contenedor .elemento').not(':first').remove();
                 $('#contenedor .elemento:first img').attr('src', '../Imagenes/Platin/llanta-para-coche-platin-p100-negro-brillo.jpg');

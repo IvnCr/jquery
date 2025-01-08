@@ -98,7 +98,7 @@
 
         /* Estilos del formulario */
         .formulario {
-            background-color: #ecf0f1;
+            background-color: #ffffff;
             padding: 25px;
             margin: 30px auto;
             width: 80%;
@@ -280,7 +280,7 @@
             // Fondo
             document.getElementById("cambiarFondo").addEventListener("click", () => {
                 const colorSeleccionado = document.getElementById("color").value;
-                document.body.style.backgroundColor = colorSeleccionado;
+                document.querySelector('.formulario').style.backgroundColor = colorSeleccionado;
             });
 
             // Añadir elemento
@@ -322,7 +322,7 @@
 
             // Reset
             document.getElementById("resetearTodo").addEventListener("click", () => {
-                document.body.style.backgroundColor = "#f4f4f4";
+                document.querySelector('.formulario').style.backgroundColor = "#ffffff";
                 document.getElementById("color").value = "#ffffff";
                 contenedor.innerHTML = `
                     <div class="elemento">

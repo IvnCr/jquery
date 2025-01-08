@@ -22,7 +22,7 @@ $(document).ready(function () {
         $('#screen').removeClass().addClass('wait');
         $('#message').text('Espera a que la pantalla se ponga roja...');
 
-        let randomTime = Math.floor(Math.random() * 3000) + 1000; // Entre 1 y 4 segundos
+        let randomTime = Math.floor(Math.random() * 3000) + 1000; 
 
         timeout = setTimeout(function () {
             startActiveState();
