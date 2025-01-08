@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    let state = 'initial'; // Estados: initial, wait, active, result
+    let state = 'initial';
     let timeout;
     let startTime;
 
@@ -19,13 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Estado de espera (wait)
+    // Espera
     function startWaitState() {
         state = 'wait';
         screen.className = 'wait';
         message.textContent = 'Espera a que la pantalla se ponga roja...';
 
-        let randomTime = Math.floor(Math.random() * 3000) + 1000; // Entre 1 y 4 segundos
+        let randomTime = Math.floor(Math.random() * 3000) + 1000; 
         timeout = setTimeout(startActiveState, randomTime);
     }
 
@@ -37,24 +37,24 @@ document.addEventListener('DOMContentLoaded', () => {
         message.textContent = '¡Demasiado pronto! Haz clic para intentarlo de nuevo.';
     }
 
-    // Estado activo (active)
+    // Activo
     function startActiveState() {
         state = 'active';
         screen.className = 'active';
         message.textContent = '¡Haz clic ahora!';
-        startTime = Date.now(); // Capturamos el tiempo actual en milisegundos
+        startTime = Date.now(); 
     }
 
-    // Fin del estado activo (calculamos tiempo de reacción)
+    // Fin
     function endActiveState() {
-        let reactionTime = Date.now() - startTime; // Tiempo en milisegundos
+        let reactionTime = Date.now() - startTime;
         state = 'result';
         screen.className = 'initial';
         message.textContent = 'Haz clic para intentarlo de nuevo.';
         result.textContent = `Tu tiempo de reacción fue: ${reactionTime} ms`;
     }
 
-    // Reiniciar juego
+    // Reiniciar
     function resetGame() {
         state = 'initial';
         result.textContent = '';

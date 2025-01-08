@@ -3,7 +3,7 @@ $(document).ready(function () {
     let timeout;
     let startTime;
 
-    // Evento principal para manejar clics en el #screen
+    // Evento principal 
     $('#screen').on('click', function () {
         if (state === 'inicial') {
             startWaitState();
@@ -16,7 +16,7 @@ $(document).ready(function () {
         }
     });
 
-    // Estado de espera (wait)
+    // Espera
     function startWaitState() {
         state = 'wait';
         $('#screen').removeClass().addClass('wait');
@@ -37,24 +37,24 @@ $(document).ready(function () {
         $('#message').text('¡Demasiado pronto! Haz clic para intentarlo de nuevo.');
     }
 
-    // Estado activo (active)
+    // Activo 
     function startActiveState() {
         state = 'active';
         $('#screen').removeClass().addClass('active');
         $('#message').text('¡Haz clic ahora!');
-        startTime = $.now(); // Capturamos el tiempo actual en milisegundos
+        startTime = $.now(); 
     }
 
-    // Fin del estado activo (calculamos tiempo de reacción)
+    // Fin
     function endActiveState() {
-        let reactionTime = $.now() - startTime; // Tiempo en milisegundos
+        let reactionTime = $.now() - startTime;
         state = 'result';
         $('#screen').removeClass().addClass('inicial');
         $('#message').text('Haz clic para intentarlo de nuevo.');
         $('#result').text(`Tu tiempo de reacción fue: ${reactionTime} ms`);
     }
 
-    // Reiniciar juego
+    // Reiniciar 
     function resetGame() {
         state = 'inicial';
         $('#result').text('');
